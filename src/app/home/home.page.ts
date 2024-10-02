@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-home',
@@ -13,10 +16,10 @@ export class HomePage {
   ciudad: string;
   fechaN: Date;
   correo: string;
-  telefono: string;
+  telefono: any;
   categoria: string;
 
-  constructor() {
+  constructor(private alertController: AlertController) {
     this.nombre = "";
     this.edad = null;
     this.genero = "";
@@ -24,12 +27,19 @@ export class HomePage {
     this.ciudad = "";
     this.fechaN = new Date();
     this.correo = "";
-    this.telefono = "";
+    this.telefono = null;
     this.categoria = "";
   }
 
-  addTask(){
+  async addTask(form: NgForm){
+    const alert = await this.alertController.create({
+      header: 'Registro exitoso',
+      message: 'Gracias por registrarte en nuestra plataforma',
+      buttons: ['OK']
+    });
 
+    await alert.present();
+    form.reset();
   }
 
 }
